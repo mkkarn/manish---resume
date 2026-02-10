@@ -1,212 +1,266 @@
+\documentclass[10pt]{article}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Original author:
-% Rahul Chauhan (http://rahulchauhan.net)
-%
-% Original repository:
-% https://github.com/mkkarn/rahulworld-Resume
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- PACKAGES ---
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[default]{lato} % Modern sans-serif font
+\usepackage[T1]{fontenc}
+\usepackage{fontawesome5} % Icons
+\usepackage{paracol}      % For columns
+\usepackage{xcolor}       % For colors
+\usepackage{tikz}         % For drawing the gray sidebar background
+\usepackage{enumitem}     % For compact lists
+\usepackage{geometry}     % For margins
+\usepackage{hyperref}     % For links
+\usepackage{eso-pic}      % For background pictures
 
-\documentclass[]{Manish-resume}
+% --- PAGE LAYOUT ---
+% Margins adjusted to fit the sidebar and header
+\geometry{top=3.5cm, bottom=1.5cm, left=1cm, right=1cm}
 
+% --- COLORS (Jayanth Template Style) ---
+\definecolor{headerbg}{RGB}{45, 45, 45}      % Dark Grey Header
+\definecolor{sidebarbg}{RGB}{230, 230, 230}  % Light Grey Sidebar
+\definecolor{accentblue}{RGB}{0, 85, 120}    % Deep Blue for Headers
+\definecolor{white}{RGB}{255, 255, 255}
+\definecolor{darktext}{RGB}{40, 40, 40}
 
+% --- COLUMN SETUP ---
+\columnratio{0.34} % Left column is 34% width
+\setlength{\columnsep}{1cm} % Gap between columns
+
+% --- BACKGROUND DRAWING ---
+% This draws the Gray Sidebar and Dark Header on EVERY page
+\AddToShipoutPictureBG{%
+    \begin{tikzpicture}[remember picture, overlay]
+        % Draw Gray Sidebar
+        \fill[sidebarbg] (current page.north west) rectangle ++(0.38\paperwidth, -\paperheight);
+        % Draw Dark Header Background (Top Banner)
+        \fill[headerbg] (current page.north west) rectangle ++(\paperwidth, -3cm);
+    \end{tikzpicture}%
+}
+
+% --- CUSTOM COMMANDS ---
+
+% Header Name & Title
+\newcommand{\name}[1]{{\fontsize{28}{32}\selectfont\bfseries\color{white}\uppercase{#1}}\\[6pt]}
+\newcommand{\role}[1]{{\fontsize{14}{16}\selectfont\bfseries\color{white}\uppercase{#1}}}
+
+% Contact Info in Header
+\newcommand{\contact}[1]{\color{white}\small #1}
+
+% Section Headers (Blue with Line)
+\newcommand{\sectionheader}[1]{
+    \vspace{12pt}
+    {\color{accentblue}\Large\bfseries\uppercase{#1}}
+    \vspace{4pt}
+    \hrule height 1pt
+    \vspace{8pt}
+}
+
+% Job Titles & Dates
+\newcommand{\jobtitle}[1]{{\large\bfseries\color{darktext} #1}}
+\newcommand{\company}[1]{{\bfseries\color{darktext} #1}}
+\newcommand{\dates}[1]{{\itshape\color{darktext} #1}}
+
+% Hyperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=white, % White links in header
+    urlcolor=accentblue % Blue links in body
+}
+
+% --- BEGIN DOCUMENT ---
 \begin{document}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%     COLUMN ONE
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% =============================================================================
+% HEADER (Absolute Positioning)
+% =============================================================================
+\begin{tikzpicture}[remember picture, overlay]
+    % Name and Role (Left Side)
+    \node[anchor=west, xshift=1cm, yshift=-1.5cm] at (current page.north west) {
+        \begin{minipage}{0.6\textwidth}
+            \name{Manish Kumar Karn}
+            \role{DevOps Engineer | Kubernetes Expert}
+        \end{minipage}
+    };
+    
+    % Contact Info (Right Side)
+    \node[anchor=east, xshift=-1cm, yshift=-1.5cm] at (current page.north east) {
+        \begin{minipage}{0.35\textwidth}
+            \begin{flushright}
+                % Location (Already White via \contact)
+                \contact{\faMapMarker* Bangalore, India} \\ 
+                
+                % Phone (Forced White)
+                \contact{\faPhone\ \color{white} +91-7899578222} \\ 
+                
+                % Email (Forced White inside the link)
+                \contact{\faEnvelope\ \href{mailto:mannykumar1126@gmail.com}{\color{white} mannykumar1126@gmail.com}} \\
+                
+                % LinkedIn (Forced White inside the link)
+                \contact{\faLinkedin\ \href{https://www.linkedin.com/in/manish-kumar-karn-69254047/}{\color{white} manishkumarkarn}} \\
+                
+                % GitHub (Forced White inside the link)
+                \contact{\faGithub\ \href{https://github.com/mkkarn}{\color{white} mkkarn1904}}
+            \end{flushright}
+        \end{minipage}
+    };
+\end{tikzpicture}
 
-\begin{minipage}[t]{0.33\textwidth} 
-\begin{large}
-	\headername{Rahul Chuahan}\\
-\end{large}
-Final Year (B.Tech)\\
-Computer Science $\&$  Engineering\\ 
-at NIT Srinagar \\ 
-CGPA:8.039 till 7th Sem 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     LINKS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Links} 
-\noindent\rule{5cm}{0.4pt}
+% =============================================================================
+% CONTENT COLUMNS
+% =============================================================================
+\begin{paracol}{2}
 
-Github:// \href{https://github.com/rahulworld}{\custombold{rahulworld}} \\
-LinkedIn://  \href{https://www.linkedin.com/in/rahulworld}{\custombold{rahulworld}} \\
-Behance://  \href{https://www.behance.net/rahul_world}{\custombold{rahul\_world}} 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     SKILLS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Skills}
-\noindent\rule{5cm}{0.4pt}
-\subsection{OS}
-GNU/Linux, Windows
-\vspace{6pt}
-\subsection{Languages}
-C/C++, Java, Python, javascript
-\vspace{6pt}
-\subsection{Framework}
-Flask, ExtJS, \\Node.js, Android,
-Web-development
-\vspace{6pt}
-\subsection{Databases}
-MySQL, PostgreSQL, MangoDB
-\vspace{6pt}
-\subsection{Others}
-Markdown, Git, Vim, \\Sublime Text, Eclipse,\\
-Android Studio, Coral Draw,\\
-Adobe Illustrator, Photoshop
-\sectionsep
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     COURSEWORK
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Coursework}
-\noindent\rule{5cm}{0.4pt}
+% --- LEFT COLUMN (Sidebar) ---
+\begin{leftcolumn}
+    
+    % --- EDUCATION ---
+    \sectionheader{Education}
+    \textbf{B.C.A. Computer Science} \\
+    C.V. Raman University \\
+    \textit{2014} | Percentage: 72\%
+    
+    % --- SKILLS ---
+    \sectionheader{Technical Skills}
+    
+    \textbf{Programming \& Scripting} \\
+    Linux, YAML, Shell scripting
+    \vspace{4pt}
+    
+    \textbf{Cloud Platforms} \\
+    AWS (EC2, VPC, S3, RDS, Lambda)
+    \vspace{4pt}
+    
+    \textbf{Infrastructure as Code} \\
+    Terraform, CloudFormation
+    \vspace{4pt}
+    
+    \textbf{Containerization} \\
+    Docker, Kubernetes (EKS)
+    \vspace{4pt}
+    
+    \textbf{CI/CD Tools} \\
+    Jenkins, GitHub Actions
+    \vspace{4pt}
+    
+    \textbf{Monitoring} \\
+    Prometheus, Grafana, Loki
+    \vspace{4pt}
+    
+    \textbf{Serverless} \\
+    AWS Lambda, DynamoDB
+    \vspace{4pt}
+    
+    \textbf{App Servers} \\
+    Apache, Tomcat
 
-Data Structures\\
-Algorithm\\
-Neural Networks\\
-Discrete Mathematics\\
-Operating Systems\\
-MySQL\\
-Data Analysis
-\sectionsep
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     EDUCATION
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Education} 
-\noindent\rule{5cm}{0.4pt}\\
-\datecolor{20XX-20YY}
-\subsection{B.Tech. in CSE}
-NIT SRINAGAR \\
-CGPA : 8.05/10(Expected)\\
-\vspace{8pt}
-\datecolor{20XX-20YY}
-\subsection{Intermediate}
-Hame Convent Inter College, FZD\\
-Percentage: 80.8\%\\
-\vspace{8pt}
-\datecolor{20XX-20YY}
-\subsection{High School}
-Hame Convent Inter College, FZD\\
-Percentage: 81\%
-\sectionsep
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%     COLUMN TWO
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % --- SIDE PROJECTS ---
+    \sectionheader{Side Projects}
+    
+    \textbf{GitOps Platform on EKS} \\
+    \textit{Terraform, ArgoCD, Helm}
+    \begin{itemize}[leftmargin=*, nosep, topsep=2pt]
+        \item Built secure GitOps platform on EKS to automate provisioning.
+        \item Provisioned EKS clusters using modular Terraform code.
+        \item Automated CI pipeline with GitHub Actions/Jenkins.
+        \item Enforced policies using OPA/Gatekeeper \& RBAC.
+    \end{itemize}
+    \vspace{8pt}
+    
+    \textbf{Event Driven Microservices} \\
+    \textit{KEDA, Argo Rollouts, Istio}
+    \begin{itemize}[leftmargin=*, nosep, topsep=2pt]
+        \item Deployed Kafka/RabbitMQ for event brokering.
+        \item Enabled event-driven autoscaling with KEDA (HPA).
+        \item Implemented Canary deployments via Argo Rollouts.
+        \item Instrumented services with OpenTelemetry \& Jaeger.
+    \end{itemize}
 
-\end{minipage} 
-\hfill
-\begin{minipage}[t]{0.66\textwidth} 
-% \descript{BS in Computer ence}
-\hspace*{0pt}\hfill    \\
-\hspace*{0pt}\hfill    \\
-\hspace*{0pt}\hfill J-90, NIT Srinagar, Hazaratbal \\
-\hspace*{0pt}\hfill Srinagar, J$\&$ K-190 006, India \\
-\hspace*{0pt}\hfill Mob.: +91-8449368522 \\
-\hspace*{0pt}\hfill Email.:\textbf{\href{mailto:rahulnitsxr@gmail.com}{rahulnitsxr@gmail.com}} \\
-\hspace*{0pt}\hfill Web.:\textbf{\href{http://rahulchauhan.net}{http://rahulchauhan.net}} 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     EXPERIENCE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Experience}
-\noindent\rule{12.5cm}{0.4pt}
-\datecolor{20XX-now} \runsubsection{OSGeo}
-\descript{Google Summer of Code 2018 Student Developer Intern }
-\noindent
-\hspace{5em}%
-\begin{minipage}{0.85\textwidth\vspace{2pt}}
-Support of Unit of Measure conversion in istSOS3: My project is to add conversion of
-unit of measure in istsos3. User can convert unit in another specified unit.
-\end{minipage}
-\descriptright{Python, PostgreSQL, Pandas, Numpy, Scipy, Pint, Postgresql-unit, Javascript}
-\sectionsep
+   
 
-\datecolor{20XX-now} \runsubsection{OSGeo}
-\descript{Google Summer of Code 2017 Student Developer Intern }
-\noindent
-\hspace{5em}%
-\begin{minipage}{0.85\textwidth\vspace{2pt}}
-Data analysis and statastical tool suit: istsos2 provides easily manage your sensor network
-and distribute your data in a standard way. which is be used to automate the creation of statisticate
-documents using OAT(Observation analysis tool) and harvesting the data from an istSOS server.
-\end{minipage}
-\descriptright{ExtJS, Dygraph.js, D3.js, Data analysis, Python, PostGIS, Pandas, Numpy, Scipy}
-\sectionsep
+\end{leftcolumn}
 
-\datecolor{20XX-now} \runsubsection{Indian Institute of Science, Banglore}
-\descript{Research Intern}
-\noindent
-\hspace{5em}%
-\begin{minipage}{0.85\textwidth\vspace{2pt}}
-pan sharpening is one kind of data fusion become very wide spread method which populate the spectral band information with the influence of high spatial information.
-\end{minipage}
-\descriptright{Satellite images(Chandrayan), Fusion Algorithm, Java}
-\sectionsep
+% --- RIGHT COLUMN (Main Body) ---
+\begin{rightcolumn}
 
-\datecolor{20XX-now} \runsubsection{Smokey, Banglore}
-\descript{Android Intern}
-\noindent
-\hspace{5em}%
-\begin{minipage}{0.85\textwidth\vspace{2pt}}
-Worked on location based services application which provide services at any location near
-services provider and also made friend module.
-\end{minipage}
-\descriptright{Android, Mysql, Google map}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     AWARDS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Achievements/Awards} 
-\noindent\rule{12.5cm}{0.4pt}
-\datecolor{20XX-now} \runsubsection{Rajsthan Hackathon}
-\descript{Participated}
-\noindent
-\hspace{5em}%
-\begin{minipage}{0.85\textwidth\vspace{2pt}}
-In this hackathon Developed distributed Voting Application.
-\end{minipage}
-\datecolor{20XX-now} \runsubsection{Angelhack, Jaipur}
-\descript{Finalist}
-\noindent
-\hspace{5em}%
-\begin{minipage}{0.85\textwidth\vspace{2pt}}
-In this hackathon Developed a Dapp using Blockchain which is based on smart contract.
-\end{minipage}
-\datecolor{20XX-now} \runsubsection{Digital India}
-\descript{Grand Prize Winner}
-\noindent
-\hspace{5em}%
-\begin{minipage}{0.85\textwidth\vspace{2pt}}
-In this hackathon developed a web-app in which showing kashmir as paradise on earth.
-\end{minipage}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     SIDE PROJECT
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Side Project}
-\noindent\rule{12.5cm}{0.4pt}
-\datecolor{20XX-now} \runsubsection{Digital Certificate Dapp using Ethereum}
-\descript{Blockchain, Web3JS}
-\noindent
-\hspace{5em}%
-\begin{minipage}{0.85\textwidth\vspace{5pt}}
-A Dapp issue certificate and verify. An Idea to use Blockchain to create Digital Certificate.
-\end{minipage}
-\datecolor{20XX-now} \runsubsection{Identifying Gender From Images of Faces}
-\descript{ML}
-\noindent
-\hspace{5em}%
-\begin{minipage}{0.85\textwidth\vspace{5pt}}
-Identifying gender of a person by looking at his/her Photograph.
-\end{minipage}
-\datecolor{20XX-now} \runsubsection{Small Project}
-\descript{Android, Data Analysis, Image Processing}
-\noindent
-\hspace{5em}%
-\begin{minipage}{0.85\textwidth\vspace{5pt}}
-Result Portal, Voice Calci, Cubic Bispline, Image Compression, smoothing, Fitting Curve.
-\end{minipage}
-\end{minipage} 
-\end{document}  \documentclass[]{article}
+    % --- WORK EXPERIENCE ---
+    \sectionheader{Work Experience}
+
+    % Job 1
+    \jobtitle{DevOps Engineer (Remote)} \\
+    \company{Microsoft Amplify (via GiGPlus)} \hfill \dates{Apr 2024 – May 2025}
+    \begin{itemize}[leftmargin=*, nosep, topsep=3pt, itemsep=2pt]
+        \item Designed and implemented Azure AD IAM architecture \& governance frameworks, strengthening compliance with enterprise standards.
+        \item Led RBAC and ABAC strategy implementation across multi-tenant environments, cutting unauthorized access incidents by 25\%.
+        \item Automated IAM workflows with Terraform \& ARM templates, reducing configuration errors by 40\% and accelerating deployment by 60\%.
+        \item Developed Conditional Access Policies \& Identity Protection strategies, mitigating phishing and lateral movement risks.
+        \item Authored SOPs and IAM technical documentation, ensuring operational efficiency.
+        \item Conducted IAM risk assessments, achieving ISO 27001 \& GDPR alignment.
+    \end{itemize}
+    \vspace{10pt}
+
+    % Job 2
+    \jobtitle{DevOps Engineer} \\
+    \company{Impress Computers (Remote, Texas)} \hfill \dates{March 2023 – Feb 2024}
+    \begin{itemize}[leftmargin=*, nosep, topsep=3pt, itemsep=2pt]
+        \item \textbf{CI/CD Automation:} Installed and managed Jenkins pipelines across multiple environments, streamlining builds and deployments.
+        \item \textbf{Cloud Expertise:} Hands-on with AWS (EC2, VPC, S3, CloudWatch, RDS, Route53, IAM, ECS, Lambda, DynamoDB).
+        \item \textbf{IaC:} Automated provisioning with Terraform, CloudFormation, and Terragrunt, boosting speed and consistency.
+        \item \textbf{Configuration:} Built reusable Ansible playbooks for scalable setups.
+        \item \textbf{Monitoring:} Implemented Prometheus and Grafana, enabling proactive issue resolution and reducing downtime.
+        \item \textbf{Scripting:} Developed automation with Python, YAML, and Shell.
+    \end{itemize}
+    \vspace{10pt}
+
+    % Job 3
+    \jobtitle{Partner Engagement / DevOps} \\
+    \company{Connectwise LLP} \hfill \dates{Sept 2021 - July 2023}
+    \begin{itemize}[leftmargin=*, nosep, topsep=3pt, itemsep=2pt]
+        \item \textbf{Container Mgmt:} Optimized Docker images and deployed apps on Kubernetes using declarative YAML manifests. Configured RBAC/Namespaces.
+        \item \textbf{Orchestration:} Used Helm charts and ArgoCD for GitOps workflows, ensuring auditable deployments and Blue/Green strategies.
+        \item \textbf{CI/CD:} Designed declarative Jenkins pipelines integrated with SonarQube and Nexus Artifactory.
+    \end{itemize}
+    \vspace{10pt}
+
+    % Job 4
+    \jobtitle{Kubernetes Admin / DevOps} \\
+    \company{Zensar Technologies, Pune} \hfill \dates{April 2019 - March 2021}
+    \begin{itemize}[leftmargin=*, nosep, topsep=3pt, itemsep=2pt]
+        \item \textbf{Cluster Management:} Provisioned production-grade EKS clusters using Terraform/Ansible. Executed zero-downtime upgrades (v1.24 to v1.27).
+        \item \textbf{Scaling:} Configured Cluster Autoscaler and HPA to reduce costs by 20\%.
+        \item \textbf{Security:} Enforced RBAC and Network Policies (Calico) for isolation.
+        \item \textbf{Deployment:} Developed custom Helm charts and synchronized state via ArgoCD.
+        \item \textbf{Observability:} Deployed Prometheus/Grafana stack and resolved critical incidents (CrashLoopBackOff, OOMKilled).
+    \end{itemize}
+    \vspace{10pt}
+
+    % Job 5
+    \jobtitle{IT Support Lead} \\
+    \company{LinkedIn (via HCL)} \hfill \dates{Oct 2017 - Nov 2018}
+    \begin{itemize}[leftmargin=*, nosep, topsep=2pt]
+        \item Led global 24/5 support teams; designed/launched 24/7 global chat.
+        \item Managed escalation, KPI monitoring, and hands-on troubleshooting for macOS/iOS.
+    \end{itemize}
+    \vspace{8pt}
+    
+    % Job 6
+    \jobtitle{IT Support Analyst} \\
+    \company{Accenture} \hfill \dates{Jan 2016 - July 2017}
+    \begin{itemize}[leftmargin=*, nosep, topsep=2pt]
+        \item Support Analyst - BMC Remedy, Identity Manager, Active Directory.
+    \end{itemize}
+    \vspace{8pt}
+    
+    % Job 7
+    \jobtitle{Service Desk Analyst} \\
+    \company{Infinite Computer Solutions} \hfill \dates{Aug 2014 - Oct 2015}
+    \begin{itemize}[leftmargin=*, nosep, topsep=2pt]
+        \item IT Support, Server-side troubleshooting.
+    \end{itemize}
+
+\end{rightcolumn}
+
+\end{paracol}
+\end{document}
